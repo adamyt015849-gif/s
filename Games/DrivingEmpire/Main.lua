@@ -8818,3 +8818,132 @@ end
 
 getgenv().Library = Library
 return Library
+
+if isfile("IceWare/Key System/Key.json") then
+    local status = api.check_key(game:GetService("HttpService"):JSONDecode(readfile("IceWare/Key System/Key.json")).Key)
+    
+    if status.code == "KEY_VALID" then
+        script_key = game:GetService("HttpService"):JSONDecode(readfile("IceWare/Key System/Key.json")).Key
+        api.load_script()
+        return
+    else
+        delfile("IceWare/Key System/Key.json")
+    end
+end
+
+local Window = Library:Window({
+    Name = "IceWare",
+    Logo = "99972733198900",
+    Version = "Key System",
+    FadeSpeed = 0.25,
+})
+
+local Pages = {
+    ["Main"] = Window:Page({
+        Name = "Key System", 
+        Icon = "84693206442598",
+        Columns = 2,
+        SubPages = false,
+    }),
+}
+
+do
+    local Section = Pages["Main"]:Section({Name = "Key Verification", Icon = "", Side = 1})
+
+    Section:Label("Enter your key to unlock access", "Center")
+
+    Section:Textbox({
+        Name = "Key Input",
+        Placeholder = "Enter your key here..",
+        Flag = "KeyInput",
+        Callback = function()
+
+        end
+    })
+
+    Section:Button({
+        Name = "Check Key",
+        Callback = function()
+            local status = api.check_key(Options.KeyInput.Value); 
+
+            if (status.code == "KEY_VALID") then
+				Library:Notification({
+                	Name = "Notification",
+            		Description = "Valid key, loading the script..",
+            		Duration = 3
+            	})
+                writefile("IceWare/Key System/Key.json", game:GetService("HttpService"):JSONEncode({Key = Options.KeyInput.Value}))
+                script_key = tostring(Options.KeyInput.Value)
+                api.load_script();
+            else
+                Library:Notification({
+                    Name = "Notification",
+                    Description = "There was an error trying to check your key, check console for details",
+                    Duration = 6
+                })
+                print(status.code)
+            end
+        end
+    })
+    
+    Section:Button({
+        Name = "Get Key (12H)",
+        Callback = function()
+            setclipboard("https://ads.luarmor.net/get_key?for=IceWare-mnyrvJtvgHGI")
+            Library:Notification({
+                Name = "Notification",
+                Description = "Link has been copied to your clipboard!",
+                Duration = 6
+            })
+        end
+    })
+    
+    Section:Button({
+        Name = "Get Key (1D)",
+        Callback = function()
+            setclipboard("https://ads.luarmor.net/get_key?for=IceWare-aMjjHLipzMLf")
+            Library:Notification({
+                Name = "Notification",
+                Description = "Link has been copied to your clipboard!",
+                Duration = 6
+            })
+        end
+    })
+
+    local Section = Pages["Main"]:Section({Name = "Information", Icon = "", Side = 2})
+
+    Section:Label("Keys are tied to your HWID, alternates devices will not work with the same key\n\n", "Center")
+
+    Section:Label("Premium removes the key system and gives you access to the best features, join our discord to learn more", "Center")
+
+    local Section = Pages["Main"]:Section({Name = "Discord", Icon = "", Side = 2})
+
+    Section:Label("Need help or updates? Join our Discord server\n", "Center")
+
+    Section:Button({
+        Name = "Join Discord",
+        Callback = function()
+            task.spawn(function()
+                if request then
+                    local Success, Err = pcall(function()
+                        request({
+                            Url = "http://127.0.0.1:6463/rpc?v=1",
+                            Method = "POST",
+                            Headers = {
+                                ["Content-Type"] = "application/json",
+                                ["Origin"] = "https://discord.com"
+                            },
+                            Body = game:GetService("HttpService"):JSONEncode({
+                                cmd = "INVITE_BROWSER",
+                                nonce = game:GetService("HttpService"):GenerateGUID(false),
+                                args = {
+                                    code = "sn2Etx6M8G",
+                                }
+                            })
+                        })
+                    end)
+                end
+            end)    
+        end
+    })
+end
