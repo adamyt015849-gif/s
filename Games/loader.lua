@@ -12,7 +12,7 @@ end)
 
 
 local shared = {
-    version = "V3.0.0";
+    version = "breached by somebody";
     folders = {
         main = 'IceWare',
         games = 'IceWare/Games',
@@ -37,7 +37,7 @@ local games = {
     [{139048751758942}] = "https://raw.githubusercontent.com/Iceware-RBLX/Roblox/refs/heads/main/Games/MidnightChasers/Main.lua"; -- Midnight Chasers (Salt Flats)
     [{133327835421432}] = "https://raw.githubusercontent.com/Iceware-RBLX/Roblox/refs/heads/main/Games/MidnightChasers/Main.lua"; -- Midnight Chasers (Tokyo CUSTOM)
     [{121510074321001}] = "https://raw.githubusercontent.com/Iceware-RBLX/Roblox/refs/heads/main/Games/MidnightChasers/Main.lua"; -- Midnight Chasers (Salt Flats CUSTOM)
-    [{3351674303}] = "https://raw.githubusercontent.com/Iceware-RBLX/Roblox/refs/heads/main/Games/DrivingEmpire/Main.lua"; -- Driving Empire
+    [{3351674303}] = "https://raw.githubusercontent.com/adamyt015849-gif/s/refs/heads/main/Games/loader.lua"; -- Driving Empire
     [{1554960397}] = "https://raw.githubusercontent.com/Iceware-RBLX/Roblox/refs/heads/main/Games/CDT/Main.lua"; -- Car Dealership Tycoon
 }
 
