@@ -8816,10 +8816,6 @@ local Library do
         
 end 
 
-local api = loadstring(game:HttpGet("https://sdkapi-public.luarmor.net/library.lua"))()
-api.script_id = "cee7c44253b57f6cfdd3499c5f97a8cf"
-api.load_script()
-
 getgenv().Library = Library
 return Library
 
