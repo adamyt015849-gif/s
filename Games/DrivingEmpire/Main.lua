@@ -1,4 +1,64 @@
 -- Meow
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if isfile("IceWare/Key System/Key.text") then -- delete old
     delfile("IceWare/Key System/Key.text")
 end
@@ -8816,8 +8876,8 @@ local Library do
         
 end 
 
-getgenv().Library = Library
-return Library
+local api = loadstring(game:HttpGet("https://sdkapi-public.luarmor.net/library.lua"))()
+api.script_id = "cee7c44253b57f6cfdd3499c5f97a8cf"
 
 if isfile("IceWare/Key System/Key.json") then
     local status = api.check_key(game:GetService("HttpService"):JSONDecode(readfile("IceWare/Key System/Key.json")).Key)
@@ -8861,30 +8921,17 @@ do
         end
     })
 
-    Section:Button({
-        Name = "Check Key",
-        Callback = function()
-            local status = api.check_key(Options.KeyInput.Value); 
-
-            if (status.code == "KEY_VALID") then
-				Library:Notification({
-                	Name = "Notification",
-            		Description = "Valid key, loading the script..",
-            		Duration = 3
-            	})
-                writefile("IceWare/Key System/Key.json", game:GetService("HttpService"):JSONEncode({Key = Options.KeyInput.Value}))
-                script_key = tostring(Options.KeyInput.Value)
-                api.load_script();
-            else
-                Library:Notification({
-                    Name = "Notification",
-                    Description = "There was an error trying to check your key, check console for details",
-                    Duration = 6
-                })
-                print(status.code)
-            end
-        end
-    })
+Section:Button({
+    Name = "Check Key",
+    Callback = function()
+        Library:Notification({
+            Name = "Notification",
+            Description = "Valid key, loading the script..",
+            Duration = 3
+        })
+        api.load_script()
+    end
+})
     
     Section:Button({
         Name = "Get Key (12H)",
@@ -8947,3 +8994,7 @@ do
         end
     })
 end
+
+getgenv().Library = Library
+return Library
+								-- yay 9k line
